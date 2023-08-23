@@ -1,0 +1,21 @@
+{
+  "name": "@bisquit/renovate-config",
+  "private": true,
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "postinstall": "simple-git-hooks",
+    "validate": "RENOVATE_CONFIG_FILE=default.json renovate-config-validator --strict"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm validate"
+  },
+  "devDependencies": {
+    "renovate": "^36.57.3",
+    "simple-git-hooks": "^2.9.0"
+  }
+}
