@@ -7,6 +7,12 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "scripts": {
+    "lint": "pnpm turbo lint"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.12"
+  },
   "prettier": {
     "singleQuote": true
   }

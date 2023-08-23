@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  validate:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -16,11 +16,11 @@ jobs:
           version: 8
       - uses: actions/setup-node@v3
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: install
         run: pnpm i
 
-      - name: validate
-        run: pnpm validate
+      - name: lint
+        run: pnpm lint
