@@ -28,8 +28,8 @@ jobs:
       - name: get tagged package
         id: tagged_package
         run: |
-          PACKAGE_NAME=$(echo ${{ github.ref_name }})
-          echo ::set-output name=name::$PACKAGE_NAME
+          PACKAGE_NAME=$(echo ${{ github.ref_name }} | sed -E "s/(@bisquit\/.+)@.+/\1/")
+          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
 
       - name: publish npm packages
         # run: pnpm publish -r --access public --no-git-checks
