@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "simple-git-hooks",
-    "validate": "RENOVATE_CONFIG_FILE=default.json renovate-config-validator --strict"
+    "validate": "renovate-config-validator --strict default.json"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm validate"
