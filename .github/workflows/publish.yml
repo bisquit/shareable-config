@@ -37,7 +37,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: tagged-package
-    if: ${{ needs.tagged-package.outputs.private }} != true
+    if: needs.tagged-package.outputs.private != 'true'
     permissions:
       contents: read
       id-token: write
