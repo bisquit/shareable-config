@@ -8,9 +8,12 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "lint": "pnpm turbo lint"
+    "lint": "pnpm turbo lint",
+    "bump": "lerna version"
   },
   "devDependencies": {
+    "@lerna-lite/cli": "^2.5.0",
+    "@lerna-lite/version": "^2.5.0",
     "turbo": "^1.10.12"
   },
   "prettier": {
