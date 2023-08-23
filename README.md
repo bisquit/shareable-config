@@ -1,12 +1,11 @@
-Shareable renovate config.
+My shareable config for [Renovate](https://docs.renovatebot.com/).
 
-See [Documentation](https://docs.renovatebot.com/config-presets/).
+## Usage
 
-## Edit
-
-```sh
-pnpm i
-
-# validate (also checked at pre-commit hook and CI)
-pnpm validate
+```json
+{
+  "extends": ["github>bisquit/renovate-config"]
+}
 ```
+
+See [Documentation](https://docs.renovatebot.com/config-presets/) about shareable config.
