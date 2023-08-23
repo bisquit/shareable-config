@@ -1,5 +1,5 @@
 {
-  "name": "@bisquit/renovate-config",
+  "name": "@bisquit/shareable-config",
   "private": true,
   "version": "0.0.0",
   "license": "MIT",
@@ -7,15 +7,7 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "scripts": {
-    "postinstall": "simple-git-hooks",
-    "validate": "renovate-config-validator --strict default.json"
-  },
-  "simple-git-hooks": {
-    "pre-commit": "pnpm validate"
-  },
-  "devDependencies": {
-    "renovate": "^36.57.3",
-    "simple-git-hooks": "^2.9.0"
+  "prettier": {
+    "singleQuote": true
   }
 }

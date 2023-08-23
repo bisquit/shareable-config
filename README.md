@@ -1,11 +1,5 @@
-My shareable config for [Renovate](https://docs.renovatebot.com/).
+My shareable config.
 
-## Usage
-
-```json
-{
-  "extends": ["github>bisquit/renovate-config"]
-}
+```sh
+pnpm i
 ```
-
-See [Documentation](https://docs.renovatebot.com/config-presets/) about shareable config.
