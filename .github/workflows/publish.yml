@@ -56,4 +56,4 @@ jobs:
         run: pnpm --filter "${{ needs.tagged-package.outputs.name }}" publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          # NPM_CONFIG_PROVENANCE: true
