@@ -6,8 +6,36 @@ on:
       - '@bisquit/*'
 
 jobs:
+  tagged-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: get tagged package
+        id: tagged_package
+        run: |
+          PACKAGE_NAME=$(echo ${{ github.ref_name }} | sed -E "s/(@bisquit\/.+)@.+/\1/")
+          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+
+      - name: get private field
+        id: private_field
+        run: |
+          PRIVATE=$(pnpm --filter "${{ steps.tagged_package.outputs.name }}" exec npm pkg get private)
+          echo "private=$PRIVATE" >> $GITHUB_OUTPUT
+    outputs:
+      name: ${{ steps.tagged_package.outputs.name }}
+      private: ${{ steps.private_field.outputs.private }}
+
   publish:
     runs-on: ubuntu-latest
+    needs: tagged-package
+    if: ${{ !needs.tagged-package.outputs.private }}
     permissions:
       contents: read
       id-token: write
@@ -25,15 +53,9 @@ jobs:
       - name: install
         run: pnpm i
 
-      - name: get tagged package
-        id: tagged_package
-        run: |
-          PACKAGE_NAME=$(echo ${{ github.ref_name }} | sed -E "s/(@bisquit\/.+)@.+/\1/")
-          echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-
       - name: publish npm packages
         # run: pnpm publish -r --access public --no-git-checks
-        run: pnpm --filter "${{ steps.tagged_package.outputs.name }}" lint
+        run: pnpm --filter "${{ needs.tagged-package.outputs.name }}" lint
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
