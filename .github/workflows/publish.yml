@@ -25,11 +25,15 @@ jobs:
       - name: install
         run: pnpm i
 
-      - name: lint
-        run: pnpm lint
+      - name: get tagged package
+        id: tagged_package
+        run: |
+          PACKAGE_NAME=$(echo ${{ github.ref_name }})
+          echo ::set-output name=name::$PACKAGE_NAME
 
       - name: publish npm packages
-        run: pnpm publish -r --access public --no-git-checks
+        # run: pnpm publish -r --access public --no-git-checks
+        run: pnpm --filter "${{ steps.tagged_package.outputs.name }}" lint
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
