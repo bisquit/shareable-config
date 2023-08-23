@@ -4,6 +4,7 @@ My shareable config for [Renovate](https://docs.renovatebot.com/).
 
 ```json
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>bisquit/shareable-config//packages/renovate/default"]
 }
 ```
