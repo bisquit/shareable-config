@@ -52,9 +52,6 @@ jobs:
           cache: 'pnpm'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: install
-        run: pnpm i
-
       - name: publish
         run: pnpm --filter "${{ needs.tagged-package.outputs.name }}" publish --access public --no-git-checks
         env:
