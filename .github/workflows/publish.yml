@@ -55,9 +55,8 @@ jobs:
       - name: install
         run: pnpm i
 
-      - name: publish npm packages
-        # run: pnpm publish -r --access public --no-git-checks
-        run: pnpm --filter "${{ needs.tagged-package.outputs.name }}" lint
+      - name: publish
+        run: pnpm --filter "${{ needs.tagged-package.outputs.name }}" publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
