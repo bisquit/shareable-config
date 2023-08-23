@@ -21,12 +21,14 @@ jobs:
         id: tagged_package
         run: |
           PACKAGE_NAME=$(echo ${{ github.ref_name }} | sed -E "s/(@bisquit\/.+)@.+/\1/")
+          echo $PACKAGE_NAME
           echo "name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
 
       - name: get private field
         id: private_field
         run: |
           PRIVATE=$(pnpm --filter "${{ steps.tagged_package.outputs.name }}" exec npm pkg get private)
+          echo $PRIVATE
           echo "private=$PRIVATE" >> $GITHUB_OUTPUT
     outputs:
       name: ${{ steps.tagged_package.outputs.name }}
@@ -35,7 +37,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: tagged-package
-    if: ${{ !needs.tagged-package.outputs.private }}
+    if: ${{ needs.tagged-package.outputs.private }} != true
     permissions:
       contents: read
       id-token: write
