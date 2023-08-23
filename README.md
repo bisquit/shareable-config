@@ -2,6 +2,8 @@
 
 My shareable config.
 
-```sh
-pnpm i
-```
+## Packages
+
+| Package                                       | Description | Version |
+| --------------------------------------------- | ----------- | ------- |
+| [@bisquit/renovate-config](packages/renovate) | Renovate    | N/A     |
